@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { SettingsService } from '../settings.service';
+import { Router } from '@angular/router';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-settings',
@@ -7,9 +10,37 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SettingsPage implements OnInit {
 
-  constructor() { }
+  username = "";
+  url = "";
+
+  constructor(
+    private router: Router,
+    private settingsService: SettingsService,
+    private alertController: AlertController,
+  ) {}
 
   ngOnInit() {
+    this.username = this.settingsService.username;
+    this.url = this.settingsService.url;
   }
 
+  async save() {
+    this.settingsService.url = this.url;
+    this.settingsService.username = this.username;
+    this.settingsService.save();
+
+    if(!this.settingsService.areSettingsValid) {
+      const controller = await this.alertController.create({
+        message: "Settings are not valid",
+        header: "Error",
+        buttons: ["OK"]
+      });
+
+      await controller.present();
+      return;
+    }
+
+    if(this.router.url.indexOf("tabs") === -1)
+      this.router.navigate(["tabs"]);
+  }
 }

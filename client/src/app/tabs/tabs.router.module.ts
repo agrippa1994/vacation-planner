@@ -20,6 +20,33 @@ const routes: Routes = [
         ]
       },
       {
+        path: 'map',
+        children: [
+          {
+            path: '',
+            loadChildren: './map/map.module#MapPageModule'
+          }
+        ]
+      },
+      {
+        path: 'cashbox',
+        children: [
+          {
+            path: '',
+            loadChildren: './cashbox/cashbox.module#CashboxPageModule'
+          }
+        ]
+      },
+      {
+        path: 'notes',
+        children: [
+          {
+            path: '',
+            loadChildren: './notes/notes.module#NotesPageModule'
+          }
+        ]
+      },
+      {
         path: 'settings',
         children: [
           {
@@ -48,4 +75,4 @@ const routes: Routes = [
   ],
   exports: [RouterModule]
 })
-export class TabsPageRoutingModule {}
+export class TabsPageRoutingModule { }
