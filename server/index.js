@@ -25,7 +25,6 @@ async function bootstrap() {
     await notesDao.init();
 
     // create controllers
-    const ctrl = new Controller(app);
     const notesController = new NotesController(notesDao);
 
     // connect routes with controller methods
