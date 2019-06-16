@@ -1,9 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { TabsPage } from './tabs.page';
-import { OverviewPage } from '../overview/overview.page';
-import { OverviewPageModule } from '../overview/overview.module';
-import { SettingsPageModule } from '../settings/settings.module';
 
 const routes: Routes = [
   {
@@ -24,7 +21,7 @@ const routes: Routes = [
         children: [
           {
             path: '',
-            loadChildren: './map/map.module#MapPageModule'
+            loadChildren: '../map/map.module#MapPageModule'
           }
         ]
       },
@@ -33,7 +30,7 @@ const routes: Routes = [
         children: [
           {
             path: '',
-            loadChildren: './cashbox/cashbox.module#CashboxPageModule'
+            loadChildren: '../cashbox/cashbox.module#CashboxPageModule'
           }
         ]
       },
@@ -42,7 +39,7 @@ const routes: Routes = [
         children: [
           {
             path: '',
-            loadChildren: './notes/notes.module#NotesPageModule'
+            loadChildren: '../notes/notes.module#NotesPageModule'
           }
         ]
       },
