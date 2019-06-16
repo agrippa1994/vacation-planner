@@ -4,7 +4,9 @@
 This is a simple vacation planner based on NodeJS and the Ionic framework.
 
 ### Features
-?
+* Map
+* Cashbox
+* Notes
 
 ### Requirements by the professor
 ```
