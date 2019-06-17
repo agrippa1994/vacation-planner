@@ -29,6 +29,11 @@
                 "glob": "**/*.svg",
                 "input": "node_modules/ionicons/dist/ionicons/svg",
                 "output": "./svg"
+              },
+              {
+                "glob": "**/*.png",
+                "input": "node_modules/leaflet/dist/images",
+                "output": "."
               }
             ],
             "styles": [
@@ -40,6 +45,9 @@
               },
               {
                 "input": "src/app/app.scss"
+              },
+              {
+                "input": "node_modules/leaflet/dist/leaflet.css"
               }
             ],
             "scripts": [],
