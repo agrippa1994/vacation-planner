@@ -15,7 +15,7 @@ const { MapController } = require("./map-controller");
 const { MapDao } = require("./map-dao");
 
 async function bootstrap() {
-    const db = new sqlite3.Database("./db.sqlite3");
+    const db = new sqlite3.Database("./db_data/db.sqlite3");
 
     // promisify DB
     db.allAsync = util.promisify(db.all);
