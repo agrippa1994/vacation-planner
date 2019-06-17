@@ -44,6 +44,7 @@ async function bootstrap() {
     app.use(cors());
     app.use(bodyParser.json());
     app.use("/api", apiRouter);
+    app.use(express.static("./www"));
     app.listen(3000);
 }
 
