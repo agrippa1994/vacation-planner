@@ -37,8 +37,8 @@ class NotesDao {
             SELECT
                 *
             FROM note
-            WHERE author = '`+author+`'
-        `);
+            WHERE author = ?
+        `,[author]);
     }
     async getAllCompletedNotes() {
         return await this.db.allAsync(`
@@ -53,29 +53,35 @@ class NotesDao {
             SELECT
                 *
             FROM note
-            WHERE id = '`+id+`'
-        `);
+            WHERE id = ?
+        `,[id]);
     }
     //UPDATE
     async updateNote(id,author, note, title, completed) {
         var updateStatement = `UPDATE note SET `;
+        var valuesToUpdate = [];
         if(author){
-            updateStatement+= `author = '`+author+`',`;
+            updateStatement+= `author = ?,`;
+            valuesToUpdate.push(author);
         }
         if(note){
-            updateStatement+= `note = '`+note+`',`;
+            updateStatement+= `note = ?,`;
+            valuesToUpdate.push(note);
         }
         if(title){
-            updateStatement+= `title = '`+title+`',`;
+            updateStatement+= `title = ?,`;
+            valuesToUpdate.push(title);
         }
         if(completed){
-            updateStatement+= `completed = '`+completed+`',`;
+            updateStatement+= `completed = ?,`;
+            valuesToUpdate.push(completed);
         }
         updateStatement = updateStatement.substr(0,updateStatement.length-1);
         if(id && !updateStatement.endsWith('SET')){
-            updateStatement+= ` WHERE id = '`+id+`' `;
+            updateStatement+= ` WHERE id = ? `;
+            valuesToUpdate.push(id);
             console.log(updateStatement);
-            return await this.db.runAsync(updateStatement);        
+            return await this.db.runAsync(updateStatement,valuesToUpdate);        
         }
         throw "No valid note to update";
         
@@ -89,8 +95,8 @@ class NotesDao {
     async deleteNote(id) {
         return await this.db.runAsync(`
         DELETE FROM note
-        WHERE id = '`+id+`'
-        `);
+        WHERE id = ?
+        `,[id]);
     }
     
     
