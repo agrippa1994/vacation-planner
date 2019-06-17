@@ -1,6 +1,7 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Notes</ion-title>
+      <ion-title>Notes</ion-title>
+      <ion-button fill="outline" slot="end" (click)="addNote()">new note</ion-button>
   </ion-toolbar>
 </ion-header>
 
@@ -19,4 +20,30 @@
       {{ note.note }}
     </ion-card-content>
   </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-subtitle>author</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      content
+    </ion-card-content>
+  </ion-card>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-subtitle>author</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      content
+    </ion-card-content>
+  </ion-card>
 </ion-content>
+
+<ion-footer *ngIf="newMessageButton">
+  <ion-toolbar>
+        <ion-item>
+          <ion-input type="text" placeholder="Message" [(ngModel)]="message"></ion-input>
+          <ion-button color="primary" (click)="sendMessage()" [disabled]="message ===''">Send</ion-button>
+        </ion-item>
+  </ion-toolbar>
+</ion-footer>

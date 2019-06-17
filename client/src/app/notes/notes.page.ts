@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ModalController, IonRefresher } from '@ionic/angular';
 import { NotesService } from '../notes.service';
 
+
 @Component({
   selector: 'app-notes',
   templateUrl: './notes.page.html',
@@ -9,11 +10,13 @@ import { NotesService } from '../notes.service';
 })
 export class NotesPage implements OnInit {
 
-  notes: any = null;
-
   constructor(
     private notesService: NotesService,
     private modalController: ModalController) { }
+
+  notes: any = null;
+  message: any = '';
+  newMessageButton = false;
 
   async ngOnInit() {
     this.loadNotes();
@@ -24,8 +27,15 @@ export class NotesPage implements OnInit {
       if(refreshEvent)
         refreshEvent.target.complete();
 
-      this.notes = notes
+      this.notes = notes;
     });
   }
 
+  addNote() {
+    this.newMessageButton = true;
+  }
+
+  sendMessage() {
+
+  }
 }
