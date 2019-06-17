@@ -8,7 +8,7 @@ class NotesDao {
         await this.db.runAsync(`
             CREATE TABLE IF NOT EXISTS note
             (
-                id ROWID,
+                id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
                 author TEXT,
                 title TEXT,
                 note TEXT,
@@ -18,7 +18,8 @@ class NotesDao {
     }
     //CREATE
     async addNote(author, note, title, completed) {
-        return await this.db.allAsync(`
+        console.log(author, note, title, completed);
+        return await this.db.runAsync(`
             INSERT INTO
                 note(author, note, title, completed)
             VALUES (?, ?, ?, ?)`, [author, note, title, completed]);
@@ -47,34 +48,46 @@ class NotesDao {
             WHERE completed = 'true'
         `);
     }
+    async getNoteById(id) {
+        return await this.db.allAsync(`
+            SELECT
+                *
+            FROM note
+            WHERE id = '`+id+`'
+        `);
+    }
     //UPDATE
     async updateNote(id,author, note, title, completed) {
-        var updateStatement = `UPDATE notes `;
+        var updateStatement = `UPDATE note SET `;
         if(author){
-            updateStatement+= `SET author = '`+author+`'`;
+            updateStatement+= `author = '`+author+`',`;
         }
         if(note){
-            updateStatement+= `SET note = '`+note+`'`;
+            updateStatement+= `note = '`+note+`',`;
         }
         if(title){
-            updateStatement+= `SET title = '`+title+`'`;
+            updateStatement+= `title = '`+title+`',`;
         }
         if(completed){
-            updateStatement+= `SET completed = '`+completed+`'`;
+            updateStatement+= `completed = '`+completed+`',`;
         }
-        if(id){
-            updateStatement+= `WHERE id = '`+id+`'`;
+        updateStatement = updateStatement.substr(0,updateStatement.length-1);
+        if(id && !updateStatement.endsWith('SET')){
+            updateStatement+= ` WHERE id = '`+id+`' `;
+            console.log(updateStatement);
+            return await this.db.runAsync(updateStatement);        
         }
-        return await this.db.allAsync(updateStatement);
+        throw "No valid note to update";
+        
     }
     //DELETE
     async deleteAllNotes() {
-        return await this.db.allAsync(`
+        return await this.db.runAsync(`
         DELETE FROM note
         `);
     }
     async deleteNote(id) {
-        return await this.db.allAsync(`
+        return await this.db.runAsync(`
         DELETE FROM note
         WHERE id = '`+id+`'
         `);

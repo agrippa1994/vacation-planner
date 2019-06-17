@@ -5,9 +5,9 @@ class NotesController {
         this.dao = dao;
     }
     //Helpers
-    async validateNote(note, checkForId = false){
-        console.log(note);
-        if(checkForId && note.id){
+    validateNote(note, checkForId){
+
+        if(checkForId && !note.id || isNaN(note.id)){
             throw "Not a valid note. Id needed";
         }
         if(!note.completed || typeof note.completed !== 'string'){
@@ -16,6 +16,9 @@ class NotesController {
         if(note.completed!=='false' && note.completed!=='true' ){
             note.completed = 'false';
         }
+        note.author = !note.author ? "":note.author;
+        note.title = !note.title ? "":note.title;
+        note.note = !note.note ? "":note.note;
         return note;
     }
     //GET
@@ -44,20 +47,29 @@ class NotesController {
             res.status(500).json(e);
         }
     }
+    async getNoteById(req, res) {
+        try {
+            if(req.params.id && !isNaN(req.params.id)){
+                res.json(await this.dao.getNoteById(req.params.id));
+            }
+            res.status(404);
+        } catch(e) {
+            res.status(500).json(e);
+        }
+    }
     //POST
     async addNote(req, res) {
         try {
-            console.log(req.body);
             var note = null;
-            try{
-                note = validateNote(req.body);
+            try{               
+                note = this.validateNote(req.body, false);
             }catch(e){
-                console.log(e);
                 res.status(400).json(e);
                 return;
             }         
             res.json(await this.dao.addNote(note.author, note.note, note.title, note.completed));
         } catch(e) {
+            console.log(e);
             res.status(500).json(e);
         }
     }
@@ -66,13 +78,15 @@ class NotesController {
         try {
             var note = null;
             try{
-                note = validateNote(req.body,true);
+                console.log(req.body);
+                note = this.validateNote(req.body,true);
             }catch(e){
                 res.status(400).json(e);
                 return;
             }  
-            res.json(await this.dao.updateNote(note));
+            res.json(await this.dao.updateNote(note.id,note.author, note.note, note.title, note.completed));
         } catch(e) {
+            console.log(e);
             res.status(500).json(e);
         }
     }
@@ -81,7 +95,7 @@ class NotesController {
         try {
             var note = null;
             try{
-                note = validateNote(req.body,true);
+                note = this.validateNote({ id: req.params.id},true);
             }catch(e){
                 res.status(400).json(e);
                 return;
