@@ -30,7 +30,12 @@ async function bootstrap() {
     // connect routes with controller methods
     const apiRouter = express.Router();
     apiRouter.get("/notes", notesController.getAllNotes.bind(notesController));
+    apiRouter.get("/notes/completed", notesController.getAllCompletedNotes.bind(notesController));
+    apiRouter.get("/notes/author/:author", notesController.getAllNotesFromAuthor.bind(notesController));
 
+    apiRouter.post("/notes", notesController.addNote.bind(notesController));
+    apiRouter.put("/notes", notesController.updateNote.bind(notesController));
+    apiRouter.delete("/notes", notesController.deleteAllNotes.bind(notesController));
     // mount routers and start web server
     app.use(cors());
     app.use(bodyParser.json());
