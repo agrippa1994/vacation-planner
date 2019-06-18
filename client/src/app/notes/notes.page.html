@@ -12,7 +12,7 @@
 
   <ion-card *ngFor="let note of notes">
     <ion-card-header>
-      <ion-card-subtitle>By {{ note.username }}</ion-card-subtitle>
+      <ion-card-subtitle>By {{ note.username }} {{ note.timestamp }}</ion-card-subtitle>
       <ion-card-title></ion-card-title>
     </ion-card-header>
 
@@ -21,22 +21,6 @@
     </ion-card-content>
   </ion-card>
 
-  <ion-card>
-    <ion-card-header>
-      <ion-card-subtitle>username</ion-card-subtitle>
-    </ion-card-header>
-    <ion-card-content>
-      content
-    </ion-card-content>
-  </ion-card>
-  <ion-card>
-    <ion-card-header>
-      <ion-card-subtitle>username</ion-card-subtitle>
-    </ion-card-header>
-    <ion-card-content>
-      content
-    </ion-card-content>
-  </ion-card>
 </ion-content>
 
 <ion-footer *ngIf="newMessageButton">

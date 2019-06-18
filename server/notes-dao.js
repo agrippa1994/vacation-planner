@@ -49,8 +49,6 @@ class NotesDao {
                 id = ?
             `, [username, note, id]);
     }
-
-
 }
 
 module.exports =  {
