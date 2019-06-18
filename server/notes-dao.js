@@ -43,7 +43,8 @@ class NotesDao {
                 note
             SET
                 username = ?,
-                note = ?
+                note = ?,
+                timestamp = datetime('now')
             WHERE
                 id = ?
             `, [username, note, id]);
