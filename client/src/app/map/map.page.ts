@@ -31,7 +31,7 @@ export class MapPage implements OnInit {
         zoom: 13
       });
 
-      L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(this.map);
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(this.map);
       await this.setMarkersOnMap();
 
       this.mapService.positionsChanged.subscribe(async () => {
