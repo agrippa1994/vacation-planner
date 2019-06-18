@@ -18,7 +18,7 @@ export class CashboxPage implements OnInit {
 
     clear(newExpenseReason: string) {
         if (newExpenseReason) {
-            this.expenses.pop(newExpenseReason);
+            this.expenses.pop();
         }
     }
 
