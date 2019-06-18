@@ -36,6 +36,9 @@ async function bootstrap() {
     // connect routes with controller methods
     const apiRouter = express.Router();
     apiRouter.get("/notes", notesController.getAllNotes.bind(notesController));
+    apiRouter.post("/notes", notesController.addNote.bind(notesController));
+    apiRouter.delete("/note/:id", notesController.deleteNote.bind(notesController));
+    apiRouter.put("/note/:id", notesController.updateNote.bind(notesController));
 
     apiRouter.get("/positions", mapController.handleGetAllPositions.bind(mapController));
     apiRouter.post("/position", mapController.handlePostPosition.bind(mapController));
