@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController, IonRefresher } from '@ionic/angular';
 import { NotesService } from '../notes.service';
+import {timestamp} from "rxjs/operators";
 
 
 @Component({
@@ -17,6 +18,7 @@ export class NotesPage implements OnInit {
   notes: any = null;
   message: any = '';
   newMessageButton = false;
+  id: any = 0;
 
   async ngOnInit() {
     await this.loadNotes();
@@ -40,9 +42,12 @@ export class NotesPage implements OnInit {
     try {
       await this.notesService.addNote(this.message);
       await this.loadNotes();
-    }
-    catch(e) {
+      this.message = '';
+    } catch (e) {}
+  }
 
-    }
+  async deleteMessage() {
+
+    this.notesService.deleteNote(this.id);
   }
 }

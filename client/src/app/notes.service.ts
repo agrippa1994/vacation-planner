@@ -22,22 +22,22 @@ export class NotesService {
   ) {}
 
   async allNotes(): Promise<Note[]> {
-    return await this.httpClient.get<Note[]>(this.settingsService.url + "/api/notes").toPromise();
+    return await this.httpClient.get<Note[]>(this.settingsService.url + '/api/notes').toPromise();
   }
 
   async addNote(note: string): Promise<void> {
-    return await this.httpClient.post<void>(this.settingsService.url + "/api/notes", {
+    return await this.httpClient.post<void>(this.settingsService.url + '/api/notes', {
       username: this.settingsService.username,
       note
     }).toPromise();
   }
 
   async deleteNote(id: number): Promise<void> {
-    return await this.httpClient.delete<void>(this.settingsService.url + "/api/note/" + id).toPromise();
+    return await this.httpClient.delete<void>(this.settingsService.url + '/api/note/' + id).toPromise();
   }
 
   async updateNote(id: number, note: string): Promise<void> {
-    return await this.httpClient.post<void>(this.settingsService.url + "/api/note/" + id, {
+    return await this.httpClient.post<void>(this.settingsService.url + '/api/note/' + id, {
       username: this.settingsService.username,
       note
     }).toPromise();
