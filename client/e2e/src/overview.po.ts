@@ -5,9 +5,4 @@ export class OverviewPage implements TabsPage {
 
     pageUrl: string = "overview";
 
-    async isShown(): Promise<boolean> {
-        const url = await browser.getCurrentUrl();
-        return url.indexOf(this.pageUrl) !== -1;
-    }
-
 }

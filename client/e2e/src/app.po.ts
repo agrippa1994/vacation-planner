@@ -11,9 +11,8 @@ export class AppPage {
     return element(by.css('ion-title')).getText();
   }
 
-  async gotoTab(tab: TabsPage) {
-    const location = await element(by.css(`ion-tab-button[tab=${tab.pageUrl}]`)).getWebElement();
-    await browser.actions().click(location);
+  gotoTab(tab: TabsPage) {
+    element(by.css(`ion-tab-button[tab=${tab.pageUrl}]`)).click();
   }
 
 }
