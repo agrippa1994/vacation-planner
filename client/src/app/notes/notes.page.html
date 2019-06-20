@@ -1,7 +1,9 @@
 <ion-header>
   <ion-toolbar>
       <ion-title>Notes</ion-title>
-      <ion-button id="newNotes_button" fill="outline" slot="end" (click)="addNote()">new note</ion-button>
+      <ion-button id="newNotes_button" fill="outline" slot="end" (click)="addNote()">
+          <ion-icon name="add"></ion-icon>
+      </ion-button>
   </ion-toolbar>
 </ion-header>
 
@@ -20,7 +22,7 @@
         </ion-card-subtitle>
     </ion-card-header>
 
-    <ion-card-content>{{ note.note }}</ion-card-content>
+    <ion-card-content>{{ note.note }}, {{note.offline}}</ion-card-content>
 
   </ion-card>
 

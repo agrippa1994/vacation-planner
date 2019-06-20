@@ -25,7 +25,7 @@ export class NotesPage implements OnInit {
   async loadNotes(refreshEvent?) {
     try {
       this.notes = await this.notesService.allNotes();
-    } catch (e) {}
+    } catch (e){}
 
     if (refreshEvent) {
       refreshEvent.target.complete();
@@ -42,7 +42,7 @@ export class NotesPage implements OnInit {
       await this.loadNotes();
       this.message = '';
       this.newMessageButton = false;
-    } catch (e) {}
+    } catch (e) {alert('error' + JSON.stringify(e)); }
   }
 
   async deleteMessage(id) {
