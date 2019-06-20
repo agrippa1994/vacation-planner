@@ -17,7 +17,6 @@ export class NotesPage implements OnInit {
   notes: any = null;
   message: any = '';
   newMessageButton = false;
-  id: any = 5;
 
   async ngOnInit() {
     await this.loadNotes();
@@ -46,9 +45,9 @@ export class NotesPage implements OnInit {
     } catch (e) {}
   }
 
-  async deleteMessage() {
+  async deleteMessage(id) {
     try {
-    this.notesService.deleteNote(4);
+    this.notesService.deleteNote(id);
     setTimeout(() => {
       this.loadNotes();
     }, 1000);

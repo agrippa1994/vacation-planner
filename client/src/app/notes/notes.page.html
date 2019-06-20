@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar>
       <ion-title>Notes</ion-title>
-      <ion-button fill="outline" slot="end" (click)="addNote()">new note</ion-button>
+      <ion-button id="newNotes_button" fill="outline" slot="end" (click)="addNote()">new note</ion-button>
   </ion-toolbar>
 </ion-header>
 
@@ -13,8 +13,8 @@
   <ion-card *ngFor="let note of notes">
 
     <ion-card-header color="light">
-        <ion-card-subtitle>By {{ note.username }}, {{ note.timestamp }}
-            <ion-button color="danger" float-right (click)="deleteMessage()">
+        <ion-card-subtitle><b>{{ note.username }}</b>, {{ note.timestamp | date : "y, MMMM d, h:mm a" : '+0400' }}
+            <ion-button color="danger" float-right (click)="deleteMessage(note.id)">
                 <ion-icon name="trash" float-right></ion-icon>
             </ion-button>
         </ion-card-subtitle>
