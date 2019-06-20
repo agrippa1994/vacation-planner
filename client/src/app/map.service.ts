@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { SettingsService } from './settings.service';
 import { Subject } from 'rxjs';
+import { PositionService } from './position.service';
 
 export class UserPosition {
   username: string;
@@ -16,30 +17,34 @@ export class MapService {
   public positions: UserPosition[] = [];
   public positionsChanged = new Subject();
   private isSetup = false;
+  private timer: any;
 
   constructor(
     private settingsService: SettingsService,
     private httpClient: HttpClient,
-  ) {
-  }
+    private positionService: PositionService,
+  ) {}
 
   async setup() {
     if(this.isSetup)
       return;
 
     await this.uploadMyPositionAndFetchOthersPositions();
-    setInterval(this.uploadMyPositionAndFetchOthersPositions.bind(this), 2000);
+    this.timer = setInterval(this.uploadMyPositionAndFetchOthersPositions.bind(this), 2000);
     this.isSetup = true;
   }
 
+  cancel() {
+    if(!this.isSetup)
+      return;
+
+    clearInterval(this.timer);
+    this.timer = null;
+    this.isSetup = false;
+  }
+
   async getCurrentPosition(): Promise<Position> {
-    return new Promise((resolve: (value: Position) => void, reject) => {
-      navigator.geolocation.getCurrentPosition((success) => {
-        resolve(success);
-      }, error => {
-        reject(error);
-      });
-    });
+    return await this.positionService.getCurrentPosition();
   }
 
   private async updatePosition(position: Position) {
