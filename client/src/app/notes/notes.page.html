@@ -13,7 +13,11 @@
   <ion-card *ngFor="let note of notes">
 
     <ion-card-header color="light">
-      <ion-card-subtitle>By {{ note.username }}, {{ note.timestamp }}</ion-card-subtitle>
+        <ion-card-subtitle>By {{ note.username }}, {{ note.timestamp }}
+            <ion-button color="danger" float-right (click)="deleteMessage()">
+                <ion-icon name="trash" float-right></ion-icon>
+            </ion-button>
+        </ion-card-subtitle>
     </ion-card-header>
 
     <ion-card-content>{{ note.note }}</ion-card-content>
