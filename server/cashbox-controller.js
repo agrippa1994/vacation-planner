@@ -4,27 +4,18 @@ Cashbox Invoice-Objekt: { "id": "1", "title": "ttttt", "cost":1234, currency:"EU
 */
 class CashboxController {
 
-    constructor(dao, exchangeRateAPI, request) {
+    constructor(dao, exchangeRateAPI,request,schedule) {
         this.dao = dao;
         this.exchangeRates = null;
-        //this.requestExchangeRate(exchangeRateAPI,request,0,3);
-    }
-    requestExchangeRate(url,request,count,max_count){
-        const that = this;
-        request(url, function (error, response, body) {
-            if (!error && response.statusCode == 200) {
-                console.log("Exchange rates initialized");
-                this.exchangeRates = body;
-            }else if(count<max_count){
-                console.log("failed to get exchange rates");
-                setTimeout(function(t){
-                    console.log("Retrying "+count+"...");
-                    t.requestExchangeRate(url,request,++count,max_count);
-                },2000,that);
-            }
-        });
-    }
+        this.exchangeRateAPI = exchangeRateAPI;
+        this.request = request;
 
+        //Update Exchange Rates once every day
+        const that = this;
+        this.requestExchangeRate(this.exchangeRateAPI,0,3,this.request,this.schedule);
+        schedule.scheduleJob('0 0 * * *', () => { that.requestExchangeRate(that.exchangeRateAPI,0,3,that.request,that.schedule); });
+    }
+ 
     async getAllInvoices(req, res) {
         try {
             var invoices = await this.dao.getAllInvoices();
@@ -118,7 +109,6 @@ class CashboxController {
     async convertAllInvoices(currency){
         var invoices = await this.dao.getAllInvoices();
         var that = this;
-        console.log("Convert Invoices:");
         invoices = invoices.map(i => {
             i.cost = that.convertToCurrency(that.parseToDisplayCosts(i.cost),i.currency,currency);
             i.currency = currency;
@@ -143,14 +133,8 @@ class CashboxController {
     }
     //Converte over EUR
     convertToCurrency(cost,fromCurrency, toCurrency){
-        console.log(cost+" "+fromCurrency+" --> "+toCurrency);
         if(!this.exchangeRates || !this.exchangeRates.rates){
-
-            //for tests
-            this.exchangeRates = JSON.parse('{"base":"EUR","date":"2019-06-21","rates":{"THB":34.859,"PHP":58.253,"CZK":25.609,"BRL":4.3357,"CHF":1.1107,"INR":78.6985,"ISK":141.5,"HRK":7.4013,"BGN":1.9558,"NOK":9.686,"USD":1.1316,"CNY":7.7792,"RUB":71.5191,"SEK":10.6308,"MYR":4.7002,"SGD":1.5362,"ILS":4.0785,"TRY":6.5806,"PLN":4.2584,"NZD":1.7261,"HKD":8.8424,"RON":4.7239,"MXN":21.5698,"CAD":1.4928,"AUD":1.6386,"GBP":0.89425,"KRW":1314.41,"ZAR":16.2178,"JPY":121.64,"DKK":7.4657,"IDR":15987.0,"HUF":323.97}}');
-            
-            
-            //throw "Error converting cost: No exchange rates present";
+           throw "Error converting cost: No exchange rates present";
         }
         var rates = this.exchangeRates.rates;
         rates["EUR"] = 1;
@@ -159,6 +143,21 @@ class CashboxController {
         }
         var EURcost = cost/parseFloat(rates[fromCurrency]);
         return EURcost * parseFloat(rates[toCurrency]);
+    }
+    requestExchangeRate(url,count,max_count,request){
+        const that = this;
+        request(url, function (error, response, body) {
+            if (!error && response.statusCode == 200) {
+                console.log("Exchange rates initialized");
+                that.exchangeRates = JSON.parse(body);
+            }else if(count<max_count){
+                console.log("failed to get exchange rates");
+                setTimeout(function(t){
+                    console.log("Retrying "+count+"...");
+                    t.requestExchangeRate(url,++count,max_count,request);
+                },2000,that);
+            }
+        });
     }
 
 

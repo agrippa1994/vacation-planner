@@ -2,6 +2,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const util = require("util");
+const schedule = require("node-schedule");
 const app = express();
 const expressWs = require("express-ws")(app);
 const sqlite3 = require("sqlite3").verbose();
@@ -39,7 +40,7 @@ async function bootstrap() {
     // create controllers
     const notesController = new NotesController(notesDao);
     const mapController = new MapController(mapDao);
-    const cashboxController = new CashboxController(cashboxDao,EXCHANGE_RATE_API_URL,request);
+    const cashboxController = new CashboxController(cashboxDao,EXCHANGE_RATE_API_URL,request,schedule);
 
     // connect routes with controller methods
     const apiRouter = express.Router();
