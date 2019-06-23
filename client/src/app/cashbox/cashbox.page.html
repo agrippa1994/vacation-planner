@@ -1,70 +1,12 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>Cashbox</ion-title>
+    <ion-button color="primary" slot="end" (click)="addInvoice()">
+      <ion-icon name="add"></ion-icon>
+    </ion-button>
   </ion-toolbar>
 </ion-header>
 <ion-content>
-  <ion-grid>
-    <ion-row>
-      <ion-col size-md="6" offset-md="3">
-        <ion-card>
-          <ion-card-header>
-            <ion-card-title>
-              New Expense
-            </ion-card-title>
-          </ion-card-header>
-          <ion-card-content>
-            <ion-item>
-              <ion-label>Sellect currency</ion-label>
-              <ion-select #curency value="Euro" okText="Okay" cancelText="Dismiss">
-                <ion-select-option value="Euro">Euro</ion-select-option>
-                <ion-select-option value="US-Dollar">US-Dollar</ion-select-option>
-              </ion-select>
-            </ion-item>
-            <ion-item>
-              <ion-label position="floating">Expense Rreason</ion-label>
-              <ion-input  #newExpenseReason
-                          (keyup.enter)="addExpenseReason(newExpenseReason.value)"
-                          (blur)="addExpenseReason(newExpenseReason.value); newExpenseReason.value='' "
-                          type="text" id="input-reason"></ion-input>
-            </ion-item>
-            <ion-item>
-              <ion-label position="floating">Expense Amount</ion-label>
-              <ion-input #newExpenseAmount
-                         (keyup.enter)="addExpenseAmount(newExpenseAmount.value)"
-                         (blur)="addExpenseAmount(newExpenseAmount.value); newExpenseAmount.value='' "
-                          type="number" id="input-amount"></ion-input>
-            </ion-item>
-            <div>
-              <ion-button (click)="addExpenseReason(newExpenseReason.value + ' ' + newExpenseAmount.value + ' ' + curency.value,
-              newExpenseReason.value = '', newExpenseAmount.value ='' )"><ion-icon slot="start" name="add"></ion-icon>
-                Add Expense</ion-button><p>{{value}}</p>
-              <ion-button (click)="clear(newExpenseReason.value = '', newExpenseAmount.value ='')" fill="outline" color="danger" id="btn-cancel">
-                <ion-icon slot="start" name="close"></ion-icon>
-                Clear</ion-button>
-            </div>
-          </ion-card-content>
-        </ion-card>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-        <ion-col size-md="6" offset-md="3">
-          <ion-list id="expenses-list" *ngFor="let expense of expenses">{{expense}}</ion-list>
-        </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col size-md="6" offset-md="3">
-        <div>
-        <ion-button (click)="totalExpense(newExpenseAmount.value)" fill="outline"><p>{{value}}</p>
-               <!-- <ion-icon slot="start"></ion-icon>-->
-          Total Expenses</ion-button>
-            </div>
-        <ion-col size-md="6" offset-md="3">
-          <ion-list id="total-expenses" *ngFor="let tot of total">{{tot}}</ion-list>
-        </ion-col>
-       <!-- <p>Total Expenses <span name="TotalExpense" id="total-expenses" *ngFor="let tot of total">{{tot}}</span></p>-->
-      </ion-col>
-    </ion-row>
-  </ion-grid>
-  </ion-content>
+
+</ion-content>
 

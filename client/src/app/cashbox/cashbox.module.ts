@@ -6,6 +6,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
 import { CashboxPage } from './cashbox.page';
+import { EditorComponent } from './editor/editor.component';
 
 const routes: Routes = [
   {
@@ -21,6 +22,7 @@ const routes: Routes = [
     IonicModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [CashboxPage]
+  declarations: [CashboxPage, EditorComponent],
+  entryComponents: [EditorComponent]
 })
 export class CashboxPageModule {}
