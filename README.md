@@ -55,7 +55,7 @@ This command downloads the Chrome Driver and runs all ```.e2e-spec.ts``` files. 
 ## Server API
 
 ### Notes
-__notes object:__    
+__notes object:__
 ```
 {
     "id": 1,
@@ -66,11 +66,11 @@ __notes object:__
 ```
 
 | Method    | Url           | Action                                   |
-| --------- |---------------| ---------------------------------------- | 
-| GET       | `/notes`      | Returns all notes                        |  
-| POST      | `/notes`      | Add new Note                             | 
-| DELETE    | `/notes/{id}` | Delete the note with the given id        | 
-| PUT       | `/notes/{id}` | Update the note with the given id        | 
+| --------- |---------------| ---------------------------------------- |
+| GET       | `/api/notes`      | Returns all notes                    |
+| POST      | `/api/notes`      | Add new Note                         |
+| DELETE    | `/api/notes/{id}` | Delete the note with the given id    |
+| PUT       | `/api/notes/{id}` | Update the note with the given id    |
 
 ### Positions
 ```
@@ -87,12 +87,12 @@ __notes object:__
 ```
 
 | Method    | Url           | Action                               |
-| --------- |---------------| ------------------------------------ | 
-| GET       | `/positions`  | Returns all positions                |  
-| POST      | `/positions`  | Add new positions                    | 
+| --------- |---------------| ------------------------------------ |
+| GET       | `/api/positions`  | Returns all positions            |
+| POST      | `/api/position`   | Add new positions                |
 
 ### Cashbox
-__invoice object:__    
+__invoice object:__
 ```
 {
     "id": 1,
@@ -102,18 +102,18 @@ __invoice object:__
     "currency": "EUR",
     "description": "describing describtion"
 }
-```  
+```
 
 #### CRUD
 | Method    | Url                | Action                                      |
-| --------- |--------------------| ------------------------------------------- | 
-| GET       | `/cashbox`         | Returns all Invoices                        |  
-| GET       | `/cashbox/id/{id}` | Returns all Invoices                        |  
-| POST      | `/cashbox`         | Add new Invoice                             | 
-| DELETE    | `/cashbox/{id}`    | Delete the Invoice with the given id        | 
-| PUT       | `/cashbox/{id}`    | Update the Invoice with the given id        | 
+| --------- |--------------------| ------------------------------------------- |
+| GET       | `/api/cashbox`         | Returns all Invoices                    |
+| GET       | `/api/cashbox/id/{id}` | Returns all Invoices                    |
+| POST      | `/api/cashbox`         | Add new Invoice                         |
+| DELETE    | `/api/cashbox/{id}`    | Delete the Invoice with the given id    |
+| PUT       | `/api/cashbox/{id}`    | Update the Invoice with the given id    |
 #### Sums and Exchange Rates
-| Method    | Url                             | Action                                      |
-| --------- |---------------------------------| ------------------------------------------- | 
-| GET       | `/cashbox/sum/{currency}`       | Returns the sum of the costs of all invoices converted to the given currency (default EUR) |  
-| GET       | `/cashbox/converted/{currency}` | Returns all Invoices with the costs converted to the given currency | 
+| Method    | Url                             | Action                                                                                         |
+| --------- |---------------------------------| ---------------------------------------------------------------------------------------------- |
+| GET       | `/api/cashbox/sum/{currency}`       | Returns the sum of the costs of all invoices converted to the given currency (default EUR) |
+| GET       | `/api/cashbox/converted/{currency}` | Returns all Invoices with the costs converted to the given currency                        |
