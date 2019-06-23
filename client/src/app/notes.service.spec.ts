@@ -18,22 +18,11 @@ describe('NotesService', () => {
       ],
     });
 
-    settingsServiceSpy.url = "url";
     settingsServiceSpy.username = "manfredo";
   });
 
   it('should be created', () => {
     const service: NotesService = TestBed.get(NotesService);
     expect(service).toBeTruthy();
-  });
-
-  it("should get all notes", async () => {
-    const service: NotesService = TestBed.get(NotesService);
-    (httpClientSpy.get as jasmine.Spy).and.returnValue(["some note"]);
-
-    const result = service.allNotes();
-
-    expect(httpClientSpy.get).toHaveBeenCalledWith("url/api/notes");
-    expect(result).toEqual(["some note"] as any);
   });
 });

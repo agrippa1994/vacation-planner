@@ -22,7 +22,6 @@ describe('new App', () => {
 
     browser.wait(ExpectedConditions.urlContains(settingsPage.pageUrl));
 
-    settingsPage.enterServerUrl("http://localhost:3000");
     settingsPage.enterUsername("automated e2e test user");
     settingsPage.clickSave();
   });

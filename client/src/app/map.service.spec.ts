@@ -4,7 +4,6 @@ import { MapService } from './map.service';
 import { HttpClient } from '@angular/common/http'
 import { SettingsService } from './settings.service';
 import { PositionService } from './position.service';
-import { async, resolve } from 'q';
 import { createPosition } from './test-helpers';
 
 describe('MapService', () => {
@@ -14,7 +13,7 @@ describe('MapService', () => {
 
   beforeEach(() => {
     httpClientSpy = jasmine.createSpyObj("HttpClient", ["get", "post"]);
-    settingsServiceSpy = { url: "url", username: "manfredo" } as SettingsService;
+    settingsServiceSpy = { username: "manfredo" } as SettingsService;
     positionServiceSpy = jasmine.createSpyObj("PositionService", ["getCurrentPosition"]);
 
     TestBed.configureTestingModule({
@@ -52,7 +51,7 @@ describe('MapService', () => {
     await service.setup()
 
     expect(positionServiceSpy.getCurrentPosition).toHaveBeenCalledTimes(1);
-    expect(httpClientSpy.post).toHaveBeenCalledWith("url/api/position", jasmine.any(Object));
+    expect(httpClientSpy.post).toHaveBeenCalledWith("/api/position", jasmine.any(Object));
     expect(httpClientSpy.post).toHaveBeenCalledTimes(1);
     expect(httpClientSpy.get).toHaveBeenCalled();
     expect(service.positions.length).toEqual(1);
