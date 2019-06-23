@@ -3,6 +3,12 @@
 ## Overview
 This is a simple vacation planner based on NodeJS and the Ionic framework.
 
+## Screenshots
+![](doc/assets/map.png)
+![](doc/assets/cashbox.png)
+![](doc/assets/notes.png)
+![](doc/assets/settings.png)
+
 ### Features
 * Map
 * Cashbox

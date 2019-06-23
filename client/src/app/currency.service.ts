@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
 export class CurrencyService {
 
   public readonly availableCurrencies = {
-    "EUR": "Teletubbieland - Euro",
+    "EUR": "Euro",
     "USD": "US - Dollar",
     "GBP": "UK - Pound",
     "PLN": "Poland - Zloty",
