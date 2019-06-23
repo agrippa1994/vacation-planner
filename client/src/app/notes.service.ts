@@ -20,7 +20,8 @@ export class NotesService {
 
   private get cachedNotes(): Note[] {
     try {
-      return JSON.parse(localStorage.getItem('cachedNotes')) as Note[];
+      const notes = JSON.parse(localStorage.getItem('cachedNotes')) as Note[];
+      return Array.isArray(notes) ? notes : [];
     } catch (e) {
       return [];
     }
