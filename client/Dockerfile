@@ -2,7 +2,7 @@ FROM node:10-alpine
 
 WORKDIR /usr/share/app
 COPY . .
-RUN npm install && npm run build
+RUN npm install && npm run build:prod
 
 
 FROM nginx:1.15.10

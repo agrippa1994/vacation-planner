@@ -2,7 +2,7 @@
   <ion-toolbar>
     <ion-title>Settings</ion-title>
     <ion-buttons slot="primary">
-      <ion-button color="secondary" (click)="save()">
+      <ion-button id="save" color="secondary" (click)="save()">
         <ion-icon slot="icon-only" name="save"></ion-icon>
       </ion-button>
     </ion-buttons>
@@ -12,6 +12,6 @@
 <ion-content>
   <ion-item>
     <ion-label position="floating">Username</ion-label>
-    <ion-input [(ngModel)]="username"></ion-input>
+    <ion-input id="username" [(ngModel)]="username"></ion-input>
   </ion-item>
 </ion-content>
