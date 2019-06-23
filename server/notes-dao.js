@@ -8,10 +8,10 @@ class NotesDao {
         await this.db.runAsync(`
             CREATE TABLE IF NOT EXISTS note
             (
-                id ROWID,
-                author TEXT,
-                note TEXT,
-                completed BOOL
+                id INTEGER PRIMARY KEY,
+                timestamp DATETIME DEFAULT CURRENT_TIMESTAMP,
+                username TEXT,
+                note TEXT
             )
         `);
     }
@@ -24,11 +24,30 @@ class NotesDao {
         `);
     }
 
-    async addNote(autor, note, completed) {
+    async addNote(username, note) {
         return await this.db.allAsync(`
             INSERT INTO
-                note(author, note, completed)
-            VALUES (?, ?, ?)`, [author, note, completed]);
+                note(id, username, note)
+            VALUES (NULL, ?, ?)`, [username, note]);
+    }
+
+    async deleteNote(id) {
+        return await this.db.allAsync(`
+            DELETE FROM note
+            WHERE id = ?`, [id]);
+    }
+
+    async updateNote(id, username, note) {
+        return await this.db.allAsync(`
+            UPDATE
+                note
+            SET
+                username = ?,
+                note = ?,
+                timestamp = datetime('now')
+            WHERE
+                id = ?
+            `, [username, note, id]);
     }
 }
 

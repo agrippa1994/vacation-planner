@@ -19,23 +19,39 @@ export class NotesPage implements OnInit {
   newMessageButton = false;
 
   async ngOnInit() {
-    this.loadNotes();
+    await this.loadNotes();
   }
 
-  loadNotes(refreshEvent?) {
-    this.notesService.allNotes().subscribe(notes => {
-      if(refreshEvent)
-        refreshEvent.target.complete();
+  async loadNotes(refreshEvent?) {
+    try {
+      this.notes = await this.notesService.allNotes();
+    } catch (e) {}
 
-      this.notes = notes;
-    });
+    if (refreshEvent) {
+      refreshEvent.target.complete();
+    }
   }
 
   addNote() {
     this.newMessageButton = true;
   }
 
-  sendMessage() {
+  async sendMessage() {
+    try {
+      await this.notesService.addNote(this.message);
+      await this.loadNotes();
+      this.message = '';
+      this.newMessageButton = false;
+    } catch (e) {}
+  }
 
+  async deleteMessage(id) {
+    try {
+    this.notesService.deleteNote(id);
+    setTimeout(() => {
+      this.loadNotes();
+    }, 1000);
+    } catch (e) {
+    }
   }
 }

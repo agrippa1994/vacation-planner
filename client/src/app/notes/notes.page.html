@@ -1,7 +1,9 @@
 <ion-header>
   <ion-toolbar>
       <ion-title>Notes</ion-title>
-      <ion-button fill="outline" slot="end" (click)="addNote()">new note</ion-button>
+      <ion-button id="newNotes_button" color="primary" slot="end" (click)="addNote()">
+          <ion-icon name="add"></ion-icon>
+      </ion-button>
   </ion-toolbar>
 </ion-header>
 
@@ -11,32 +13,21 @@
   </ion-refresher>
 
   <ion-card *ngFor="let note of notes">
-    <ion-card-header>
-      <ion-card-subtitle>By {{ note.author }}</ion-card-subtitle>
-      <ion-card-title></ion-card-title>
+
+    <ion-card-header color="light">
+        <ion-card-subtitle><b>{{ note.username }}</b>, {{ note.timestamp | date : "y, MMMM d, h:mm a" : '+0400' }}
+            <ion-button color="medium" float-right (click)="deleteMessage(note.id)">
+                <ion-icon name="trash" float-right></ion-icon>
+            </ion-button>
+        </ion-card-subtitle>
     </ion-card-header>
 
-    <ion-card-content>
-      {{ note.note }}
+    <ion-card-content>{{ note.note }}
+        <ion-icon *ngIf=note.offline class="isOffline" name="sync" size="small" float-left></ion-icon>
     </ion-card-content>
+
   </ion-card>
 
-  <ion-card>
-    <ion-card-header>
-      <ion-card-subtitle>author</ion-card-subtitle>
-    </ion-card-header>
-    <ion-card-content>
-      content
-    </ion-card-content>
-  </ion-card>
-  <ion-card>
-    <ion-card-header>
-      <ion-card-subtitle>author</ion-card-subtitle>
-    </ion-card-header>
-    <ion-card-content>
-      content
-    </ion-card-content>
-  </ion-card>
 </ion-content>
 
 <ion-footer *ngIf="newMessageButton">

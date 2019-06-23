@@ -1,0 +1,21 @@
+{
+  "name": "vacation-planner",
+  "version": "1.0.0",
+  "description": "Vacation Planner (University Project)",
+  "scripts": {
+    "install": "cd server && npm install && cd ../client && npm install",
+    "server": "cd server && npm start",
+    "client": "cd client && ionic serve",
+    "test": "cd client && npm run e2e && npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/agrippa1994/vacation-planner.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/agrippa1994/vacation-planner/issues"
+  },
+  "homepage": "https://github.com/agrippa1994/vacation-planner#readme"
+}

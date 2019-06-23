@@ -11,7 +11,6 @@ import { AlertController } from '@ionic/angular';
 export class SettingsPage implements OnInit {
 
   username = "";
-  url = "";
 
   constructor(
     private router: Router,
@@ -21,11 +20,9 @@ export class SettingsPage implements OnInit {
 
   ngOnInit() {
     this.username = this.settingsService.username;
-    this.url = this.settingsService.url;
   }
 
   async save() {
-    this.settingsService.url = this.url;
     this.settingsService.username = this.username;
     this.settingsService.save();
 
