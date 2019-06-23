@@ -19,7 +19,7 @@ class NotesDao {
     async getAllNotes() {
         return await this.db.allAsync(`
             SELECT
-                *
+                id, username, note, strftime('%s', timestamp) as timestamp
             FROM note
         `);
     }
