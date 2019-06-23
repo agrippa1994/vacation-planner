@@ -32,12 +32,23 @@ Topic-E "Vacation-App"
 
 
 ## Development Guide
-* Open two terminals
-* In the first terminal, navigate to the ```client``` directory
-* In the second terminal, navigate to the ```server``` directory
-* In both terminals execute ```npm install```. This command will install all dependencies for the server and client.
-* In the first ```client``` terminal execute ```ionic serve```. This builds and serves the client application.
-* In the second ```server``` terminal execute ```npm start``` to start the server application.
+
+### Installing Dependencies
+* Open a terminal and navigate to the project directory
+* Execute ```npm install```. This installs the dependencies for the client and the server
+
+### Starting the Server
+* Open a terminal and navigate to the project directory
+* Execute ```npm run server```
+
+### Starting the Client
+* Open a terminal and navigate to the project directory
+* Execute ```npm run client```
+
+### Executing All Tests
+* Open a terminal and navigate to the project directory
+* Execute ```npm test```
+
 
 ## Testing
 
