@@ -48,7 +48,7 @@ export class MapService {
   }
 
   private async updatePosition(position: Position) {
-    return this.httpClient.post(this.settingsService.url + "/api/position", {
+    return this.httpClient.post("/api/position", {
       username: this.settingsService.username,
       position: {
         timestamp: position.timestamp,
@@ -73,6 +73,6 @@ export class MapService {
   }
 
   private async fetchPositions() : Promise<UserPosition[]> {
-    return await this.httpClient.get<UserPosition[]>(this.settingsService.url + "/api/positions").toPromise();
+    return await this.httpClient.get<UserPosition[]>("/api/positions").toPromise();
   }
 }

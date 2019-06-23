@@ -25,11 +25,11 @@ export class NotesPage implements OnInit {
   async loadNotes(refreshEvent?) {
     try {
       this.notes = await this.notesService.allNotes();
-    }
-    catch(e) {}
+    } catch (e) {}
 
-    if(refreshEvent)
+    if (refreshEvent) {
       refreshEvent.target.complete();
+    }
   }
 
   addNote() {
@@ -40,9 +40,18 @@ export class NotesPage implements OnInit {
     try {
       await this.notesService.addNote(this.message);
       await this.loadNotes();
-    }
-    catch(e) {
+      this.message = '';
+      this.newMessageButton = false;
+    } catch (e) {}
+  }
 
+  async deleteMessage(id) {
+    try {
+    this.notesService.deleteNote(id);
+    setTimeout(() => {
+      this.loadNotes();
+    }, 1000);
+    } catch (e) {
     }
   }
 }
