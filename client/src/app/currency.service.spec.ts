@@ -1,12 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 
-import { CashboxService } from './cashbox.service';
+import { CurrencyService } from './currency.service';
 
-describe('CashboxService', () => {
+describe('CurrencyService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: CashboxService = TestBed.get(CashboxService);
+    const service: CurrencyService = TestBed.get(CurrencyService);
     expect(service).toBeTruthy();
   });
 });

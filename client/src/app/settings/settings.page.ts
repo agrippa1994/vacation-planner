@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { SettingsService } from '../settings.service';
 import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
+import { CurrencyService } from '../currency.service';
 
 @Component({
   selector: 'app-settings',
@@ -11,11 +12,14 @@ import { AlertController } from '@ionic/angular';
 export class SettingsPage implements OnInit {
 
   username = "";
+  defaultCurrency = "EUR";
+  availableCurrencies = this.currencyService.availableCurrencies;
 
   constructor(
     private router: Router,
     private settingsService: SettingsService,
     private alertController: AlertController,
+    private currencyService: CurrencyService,
   ) {}
 
   ngOnInit() {
@@ -24,6 +28,7 @@ export class SettingsPage implements OnInit {
 
   async save() {
     this.settingsService.username = this.username;
+    this.settingsService.defaultCurrency = this.defaultCurrency;
     this.settingsService.save();
 
     if(!this.settingsService.areSettingsValid) {

@@ -16,26 +16,26 @@ describe('SettingsService', () => {
   it("should return false if settings are not valid", async () => {
     const service: SettingsService = TestBed.get(SettingsService);
     service.username = "";
-    service.url = "";
+    service.defaultCurrency = "";
     expect(service.areSettingsValid).toBeFalsy();
   });
 
   it("should save to local storage", async () => {
     const service: SettingsService = TestBed.get(SettingsService);
 
-    service.url = "https://localhost:3000";
+    service.defaultCurrency = "EUR";
     service.username = "manfredo";
     service.save();
   });
 
   it("should read settings from local storage", async () => {
     const service: SettingsService = TestBed.get(SettingsService);
-    service.url = "https://localhost:3000";
+    service.defaultCurrency = "EUR";
     service.username = "manfredo";
     service.save();
 
     const service2: SettingsService = TestBed.get(SettingsService);
-    expect(service2.url).toBe("https://localhost:3000");
+    expect(service2.defaultCurrency).toBe("EUR");
     expect(service2.username).toBe("manfredo");
   });
 });
