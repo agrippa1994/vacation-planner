@@ -28,11 +28,19 @@ export class CashboxService {
     return await this.httpClient.post<void>("/api/cashbox", invoice).toPromise();
   }
 
+  async update(invoice: Invoice): Promise<void> {
+    return await this.httpClient.put<void>(`/api/cashbox/${invoice.id}`, invoice).toPromise();
+  }
+
   async all(): Promise<Invoice[]> {
     return await this.httpClient.get<Invoice[]>("/api/cashbox").toPromise();
   }
 
-  async sum(): Promise<Sum> {
-    return await this.httpClient.get<Sum>("/api/cashbox/sum").toPromise();
+  async sum(currency = "EUR"): Promise<Sum> {
+    return await this.httpClient.get<Sum>(`/api/cashbox/sum/${currency}`).toPromise();
+  }
+
+  async delete(invoice: Invoice): Promise<void> {
+    return await this.httpClient.delete<void>(`/api/cashbox/${invoice.id}`).toPromise();
   }
 }

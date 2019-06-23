@@ -1,32 +1,25 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController, AlertController } from '@ionic/angular';
 import { Invoice, CashboxService } from 'src/app/cashbox.service';
+import { CurrencyService } from 'src/app/currency.service';
 
 @Component({
   selector: 'app-editor',
   templateUrl: './editor.component.html',
   styleUrls: ['./editor.component.scss'],
 })
-export class EditorComponent implements OnInit {
+export class EditorComponent {
 
+  isEditing = false;
   invoice = new Invoice();
-
-  availableCurrencies = {
-    "EUR": "Teletubbieland - Euro",
-    "USD": "US - Dollar",
-    "GBP": "UK - Pound",
-    "PLN": "Poland - Zloty",
-    "RUB": "Russia - Rubel",
-    "THB": "Thailand - Baht"
-  }
+  availableCurrencies = this.currencyService.availableCurrencies
 
   constructor(
     private modalController: ModalController,
     private cashboxService: CashboxService,
     private alertController: AlertController,
+    private currencyService: CurrencyService,
   ) { }
-
-  ngOnInit() {}
 
   async close() {
     await this.modalController.dismiss();
@@ -34,13 +27,16 @@ export class EditorComponent implements OnInit {
 
   async saveAndClose() {
     try {
-      await this.cashboxService.add(this.invoice);
+      if(this.isEditing)
+        await this.cashboxService.update(this.invoice);
+      else
+        await this.cashboxService.add(this.invoice);
       await this.modalController.dismiss();
     } catch(e) {
       const alert = await this.alertController.create({
         buttons: ["OK"],
         header: "Error",
-        subHeader: "Error while creating invoice"
+        subHeader: "Error while creating or updating the invoice"
       });
 
       await alert.present();

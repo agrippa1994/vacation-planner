@@ -14,4 +14,11 @@
     <ion-label position="floating">Username</ion-label>
     <ion-input id="username" [(ngModel)]="username"></ion-input>
   </ion-item>
+  <ion-item>
+    <ion-label>Choose your default currency</ion-label>
+    <ion-select [(ngModel)]="defaultCurrency" value="EUR" okText="OK" cancelText="Cancel">
+      <ion-select-option *ngFor="let item of availableCurrencies | keyvalue" value="{{ item.key }}">{{ item.value }}
+      </ion-select-option>
+    </ion-select>
+  </ion-item>
 </ion-content>
