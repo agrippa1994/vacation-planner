@@ -12,8 +12,12 @@ export class EditorComponent implements OnInit {
   invoice = new Invoice();
 
   availableCurrencies = {
-    "EUR": "Euro",
-    "USD": "US Dollar",
+    "EUR": "Teletubbieland - Euro",
+    "USD": "US - Dollar",
+    "GBP": "UK - Pound",
+    "PLN": "Poland - Zloty",
+    "RUB": "Russia - Rubel",
+    "THB": "Thailand - Baht"
   }
 
   constructor(
