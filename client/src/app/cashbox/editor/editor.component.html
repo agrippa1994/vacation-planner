@@ -1,46 +1,37 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Invoice Editor</ion-title>
     <ion-button color="primary" slot="end" (click)="close()">
       <ion-icon name="close"></ion-icon>
+    </ion-button>
+    <ion-title>Invoice Editor</ion-title>
+    <ion-button color="primary" slot="end" (click)="saveAndClose()">
+      <ion-icon name="save"></ion-icon>
     </ion-button>
   </ion-toolbar>
 </ion-header>
 <ion-content>
 
-  <ion-card>
-    <ion-card-header>
-      <ion-card-title>
-        New Expense
-      </ion-card-title>
-    </ion-card-header>
-    <ion-card-content>
-      <ion-item>
-        <ion-label>Currency</ion-label>
-        <ion-select [(ngModel)]="invoice.currency" value="EUR" okText="OK" cancelText="Cancel">
-          <ion-select-option *ngFor="let item of availableCurrencies | keyvalue" value="{{ item.key }}">{{ item.value }}
-          </ion-select-option>
-        </ion-select>
-      </ion-item>
-      <ion-item>
-        <ion-label position="floating">Expense Title</ion-label>
-        <ion-input [(ngModel)]="invoice.title" type="text"></ion-input>
-      </ion-item>
-      <ion-item>
-          <ion-label position="floating">Expense Description</ion-label>
-          <ion-input [(ngModel)]="invoice.description" type="text"></ion-input>
-        </ion-item>
-      <ion-item>
-        <ion-label position="floating">Expense Amount</ion-label>
-        <ion-input [(ngModel)]="invoice.cost" type="number" id="input-amount"></ion-input>
-      </ion-item>
-      <div>
-        <ion-button (click)="add()">
-          <ion-icon slot="start" name="add"></ion-icon>
-          Add Expense
-        </ion-button>
-      </div>
-    </ion-card-content>
-  </ion-card>
+  <ion-item>
+    <ion-label>Currency</ion-label>
+    <ion-select [(ngModel)]="invoice.currency" value="EUR" okText="OK" cancelText="Cancel">
+      <ion-select-option *ngFor="let item of availableCurrencies | keyvalue" value="{{ item.key }}">{{ item.value }}
+      </ion-select-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="floating">Expense Title</ion-label>
+    <ion-input [(ngModel)]="invoice.title" type="text"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="floating">Expense Description</ion-label>
+    <ion-input [(ngModel)]="invoice.description" type="text"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="floating">Expense Amount</ion-label>
+    <ion-input [(ngModel)]="invoice.cost" type="number" id="input-amount"></ion-input>
+  </ion-item>
 
 </ion-content>

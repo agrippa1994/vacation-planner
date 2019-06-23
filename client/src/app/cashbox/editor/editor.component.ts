@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalController } from '@ionic/angular';
-import { Invoice } from 'src/app/cashbox.service';
+import { ModalController, AlertController } from '@ionic/angular';
+import { Invoice, CashboxService } from 'src/app/cashbox.service';
 
 @Component({
   selector: 'app-editor',
@@ -16,12 +16,31 @@ export class EditorComponent implements OnInit {
     "USD": "US Dollar",
   }
 
-  constructor(private modalController: ModalController) { }
+  constructor(
+    private modalController: ModalController,
+    private cashboxService: CashboxService,
+    private alertController: AlertController,
+  ) { }
 
   ngOnInit() {}
 
   async close() {
     await this.modalController.dismiss();
+  }
+
+  async saveAndClose() {
+    try {
+      await this.cashboxService.add(this.invoice);
+      await this.modalController.dismiss();
+    } catch(e) {
+      const alert = await this.alertController.create({
+        buttons: ["OK"],
+        header: "Error",
+        subHeader: "Error while creating invoice"
+      });
+
+      await alert.present();
+    }
   }
 
 }
