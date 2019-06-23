@@ -40,7 +40,7 @@ export class NotesService {
   async allNotes(): Promise<Note[]> {
     try {
       await this.uploadCachedNotes(); // zuerst upload der offline-notes und dann download vom server
-      const serverNotes = await this.httpClient.get<Note[]>(this.settingsService.url + '/api/notes').toPromise();
+      const serverNotes = await this.httpClient.get<Note[]>('/api/notes').toPromise();
       for (const note of serverNotes) {
         note.offline = false; // notes vom server sind nicht offline
       }
@@ -63,7 +63,7 @@ export class NotesService {
     for (const note of notesToUpload) {
       try {
         // senden der note
-        await this.httpClient.post<void>(this.settingsService.url + '/api/notes', note).toPromise();
+        await this.httpClient.post<void>('/api/notes', note).toPromise();
 
         // note vom cache löschen, da sie erfolgreich hochgeladen wurde
         const cachedNotes = this.cachedNotes;
@@ -81,7 +81,7 @@ export class NotesService {
       note
     };
     try {
-      return await this.httpClient.post<void>(this.settingsService.url + '/api/notes', body).toPromise();
+      return await this.httpClient.post<void>('/api/notes', body).toPromise();
     } catch (e) {
       body.offline = true;
       const cachedNotes = this.cachedNotes;
@@ -91,11 +91,11 @@ export class NotesService {
   }
 
   async deleteNote(id: number): Promise<void> {
-    return await this.httpClient.delete<void>(this.settingsService.url + '/api/note/' + id).toPromise();
+    return await this.httpClient.delete<void>('/api/note/' + id).toPromise();
   }
 
   async updateNote(id: number, note: string): Promise<void> {
-    return await this.httpClient.post<void>(this.settingsService.url + '/api/note/' + id, {
+    return await this.httpClient.post<void>('/api/note/' + id, {
       username: this.settingsService.username,
       note
     }).toPromise();

@@ -9,7 +9,7 @@ export class SettingsService {
   public url = "";
 
   get areSettingsValid() {
-    return this.username.length > 0 && this.url.length > 0;
+    return this.username.length > 0;
   }
 
   constructor() {
