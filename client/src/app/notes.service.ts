@@ -4,7 +4,7 @@ import { SettingsService } from './settings.service';
 
 export class Note {
   id ?: number;
-  timestamp ?: string;
+  timestamp ?: Date;
   username: string;
   note: string;
   offline = false;
@@ -42,6 +42,7 @@ export class NotesService {
       await this.uploadCachedNotes(); // zuerst upload der offline-notes und dann download vom server
       const serverNotes = await this.httpClient.get<Note[]>('/api/notes').toPromise();
       for (const note of serverNotes) {
+        note.timestamp = new Date(note.timestamp as any * 1000); // convert to epoch time
         note.offline = false; // notes vom server sind nicht offline
       }
       // delete all online notes from cachedNotes, because we retrieved all onlinenotes now

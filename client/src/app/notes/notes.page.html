@@ -15,7 +15,7 @@
   <ion-card *ngFor="let note of notes">
 
     <ion-card-header color="light">
-        <ion-card-subtitle><b>{{ note.username }}</b>, {{ note.timestamp | date : "y, MMMM d, h:mm a" : '+0400' }}
+        <ion-card-subtitle><b>{{ note.username }}</b>, {{ note.timestamp | date:'medium' }}
             <ion-button color="medium" float-right (click)="deleteMessage(note.id)">
                 <ion-icon name="trash" float-right></ion-icon>
             </ion-button>
