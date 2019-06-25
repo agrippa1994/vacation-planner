@@ -6,7 +6,8 @@
     "install": "cd server && npm install && cd ../client && npm install",
     "server": "cd server && npm start",
     "client": "cd client && ionic serve",
-    "test": "cd client && npm run e2e && npm test"
+    "test": "cd client && npm run e2e && npm test",
+    "compodoc": "./node_modules/.bin/compodoc -p tsconfig.json -w -s"
   },
   "repository": {
     "type": "git",
