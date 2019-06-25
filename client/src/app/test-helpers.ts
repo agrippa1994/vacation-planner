@@ -1,3 +1,8 @@
+/**
+ * test position
+ * @returns {Position}
+ */
+
 export function createPosition(): Position {
   return {
     timestamp: 1,

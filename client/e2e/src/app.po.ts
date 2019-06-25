@@ -1,6 +1,8 @@
 import { browser, by, element } from 'protractor';
 import { TabsPage } from './tabspage';
-
+/**
+ * @ignore
+ */
 export class AppPage {
 
   navigateTo() {

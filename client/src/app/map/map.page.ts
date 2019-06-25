@@ -3,6 +3,10 @@ import { MapService } from '../map.service';
 import * as L from "leaflet";
 import { AlertController } from '@ionic/angular';
 
+/**
+ * Page for showing user position on a map
+ */
+
 declare var require : any;
 
 @Component({
@@ -11,19 +15,40 @@ declare var require : any;
   styleUrls: ['./map.page.scss'],
 })
 export class MapPage implements OnInit {
-
+    /**
+     * declare map
+     */
   map: any;
+    /**
+     * declare markers
+     * @type {{}}
+     */
   markers: { [username: string]: any } = {};
 
+    /**
+     * declare parameters
+     * @param {MapService} mapService
+     * @param {AlertController} alertController
+     */
   constructor(
     private mapService: MapService,
     private alertController: AlertController,
   ) { }
 
+    /**
+     * run methods
+     * @returns {Promise<void>}
+     */
   async ngOnInit() {
     await this.mapService.setup();
     await this.loadMap();
   }
+
+    /**
+     * Load Map from openstreetmap
+     * set user location
+     * @returns {Promise<void>}
+     */
 
   private async loadMap() {
     try {
@@ -56,6 +81,9 @@ export class MapPage implements OnInit {
     }
   }
 
+    /**
+     * use of leaflet to show map with marker
+     */
   private applyLeafletProductionBuildHack() {
     // see https://stackoverflow.com/questions/56411497/leaflet-marker-not-found-production-env-angular-7
     delete L.Icon.Default.prototype._getIconUrl;
@@ -66,6 +94,10 @@ export class MapPage implements OnInit {
     });
   }
 
+    /**
+     * markers settings (set / update / remove)
+     * @returns {Promise<void>}
+     */
   private async setMarkersOnMap() {
     if (!this.map)
       return;
@@ -93,13 +125,17 @@ export class MapPage implements OnInit {
       }
     }
 
-    // Collect all usernames of the position update
+      /**
+       * Collect all usernames of the position update
+        */
     const receivedUsernames: string[] = [];
     for (const position of positions) {
       receivedUsernames.push(position.username);
     }
 
-    // Remove all local markers of users that were not part of the received payload
+      /**
+       * Remove all local markers of users that were not part of the received payload
+        */
     const currentUsernames = Object.keys(this.markers);
     for (const currentUsername of currentUsernames) {
       if (receivedUsernames.indexOf(currentUsername) === -1) {
