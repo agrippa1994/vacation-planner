@@ -11,7 +11,8 @@
     "test": "ng test --watch false",
     "test:watch": "ng test --watch true",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "compodoc": "./node_modules/.bin/compodoc -p tsconfig.json -w -s"
   },
   "private": true,
   "dependencies": {
@@ -41,6 +42,7 @@
     "@angular/compiler": "~7.2.2",
     "@angular/compiler-cli": "~7.2.2",
     "@angular/language-service": "~7.2.2",
+    "@compodoc/compodoc": "^1.1.9",
     "@ionic/angular-toolkit": "~1.5.1",
     "@ionic/lab": "2.0.2",
     "@types/jasmine": "~2.8.8",

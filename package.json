@@ -6,7 +6,8 @@
     "install": "cd server && npm install && cd ../client && npm install",
     "server": "cd server && npm start",
     "client": "cd client && ionic serve",
-    "test": "cd client && npm run e2e && npm test"
+    "test": "cd client && npm run e2e && npm test",
+    "compodoc": "npx compodoc -p src/tsconfig.app.json"
   },
   "repository": {
     "type": "git",
@@ -17,5 +18,8 @@
   "bugs": {
     "url": "https://github.com/agrippa1994/vacation-planner/issues"
   },
-  "homepage": "https://github.com/agrippa1994/vacation-planner#readme"
+  "homepage": "https://github.com/agrippa1994/vacation-planner#readme",
+  "dependencies": {
+    "compodoc": "0.0.41"
+  }
 }
