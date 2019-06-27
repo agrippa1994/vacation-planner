@@ -55,9 +55,9 @@ Topic-E "Vacation-App"
 * Open a terminal and navigate to the project directory
 * Execute ```npm test```
 
-### Install the Documentation-Generator
-* Open a terminal and navigate to the project directory
-* Execute ```npm install compodoc```
+### Create Documentation
+* Open a terminal and navigate to the ```client``` directory
+* Execute ```npm run compodoc``` to generate the documentation
 
 ## Testing
 
