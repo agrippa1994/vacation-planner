@@ -12,7 +12,8 @@
     "test:watch": "ng test --watch true",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "compodoc": "./node_modules/.bin/compodoc -p tsconfig.json -w -s"
+    "compodoc": "compodoc -p tsconfig.json",
+    "compodoc:watch": "compodoc -p tsconfig.json -w -s"
   },
   "private": true,
   "dependencies": {
