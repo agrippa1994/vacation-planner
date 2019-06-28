@@ -11,6 +11,12 @@ language: node_js
 node_js:
   - "10"
 
+cache:
+  directories:
+    - client/node_modules
+    - server/node_modules
+    - node_modules
+
 before_script:
   - export DISPLAY=:99.0
   - sh -e /etc/init.d/xvfb start
