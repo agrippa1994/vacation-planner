@@ -1,4 +1,4 @@
-# Vacation Planner
+# Vacation Planner [![Build Status](https://travis-ci.org/agrippa1994/vacation-planner.svg?branch=master)](https://travis-ci.org/agrippa1994/vacation-planner)
 
 ## Overview
 This is a simple vacation planner based on NodeJS and the Ionic framework.
@@ -13,6 +13,7 @@ This is a simple vacation planner based on NodeJS and the Ionic framework.
 * Map
 * Cashbox
 * Notes
+
 
 ### Requirements by the professor
 ```
@@ -35,7 +36,6 @@ Topic-E "Vacation-App"
     ```
     npm install -g ionic
     ```
-
 
 ## Development Guide
 
@@ -71,6 +71,10 @@ The automatic UI tests are located in the ```client/e2e/src``` directory. Each `
 * Open a terminal and navigate to the ```client``` directory. Execute ```npm run e2e``` in this directory.
 
 This command downloads the Chrome Driver and runs all ```.e2e-spec.ts``` files. The test starts the browser and communicates with the browser via the Chrome Driver.
+
+### Documentation
+Documentation is available on GitHub, please check the [GitHub Page](https://agrippa1994.github.io/vacation-planner).
+
 
 ## Server API
 
