@@ -19,5 +19,7 @@ install:
   - npm install
 
 script:
+  - npm run test
+
   - cd client
   - npm run compodoc
