@@ -6,11 +6,15 @@ self.toolbox.options.cache = {
     name: 'ionic-cache'
 };
 
+const CACHE_OFFLINE = [
+    '/offline.html',
+];
+
 // pre-cache our key assets
 self.toolbox.precache(
     [
-        'index.html',
-        'manifest.json'
+        '/index.html',
+        '/manifest.json'
     ]
 );
 

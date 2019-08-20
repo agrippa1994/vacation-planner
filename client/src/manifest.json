@@ -1,11 +1,11 @@
 {
-  "name": "Ionic",
-  "short_name": "Ionic",
-  "start_url": "index.html",
+  "name": "vacation-planner",
+  "short_name": "vacation-planner",
+  "start_url": "/index.html",
   "display": "standalone",
   "icons": [{
-    "src": "favicon.png",
-    "sizes": "512x512",
+    "src": "assets/icon/favicon.png",
+    "sizes": "144x144",
     "type": "image/png"
   }],
   "background_color": "#4e8ef7",
