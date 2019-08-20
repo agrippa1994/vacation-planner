@@ -77,9 +77,7 @@
                   "maximumWarning": "2mb",
                   "maximumError": "5mb"
                 }
-              ],
-              "serviceWorker": true,
-              "ngswConfigPath": "src/service-worker.json"
+              ]
             },
             "ci": {
               "progress": false
