@@ -20,18 +20,17 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   <meta name="apple-mobile-web-app-title" content="Vacation Planner">
 
-  <script>
+  <!--<script>
       if ('serviceWorker' in navigator) {
-          navigator.serviceWorker.register('sw.js').then(function(registration) {
-              console.log('ServiceWorker registration successful with scope: ', registration.scope);
-          }).catch(function(err) {
-              //registration failed :(
-              console.log('ServiceWorker registration failed: ', err);
-          });
-      }else {
-          console.log('No service-worker on this browser');
+          navigator.serviceWorker.register('sw.js')
+              .then(function(registration) {
+                  console.log("Service Worker Registered", registration);
+              })
+              .catch(function(err) {
+                  console.log("Service Worker Failed to Register", err);
+              })
       }
-  </script>
+  </script>-->
 </head>
 
 <body>

@@ -1,27 +1,50 @@
 'use strict';
 
-// importScripts('./build/sw-toolbox.js');
+console.log("service worker registered")
 
-self.toolbox.options.cache = {
-    name: 'ionic-cache'
-};
+const CACHE_NAME = 'static-cache';
 
 const CACHE_OFFLINE = [
-    '/offline.html',
+    './',
+    './theme/variables.scss',
+    'global.scss',
+    'main.js',
+    'index.html',
 ];
 
-// pre-cache our key assets
-self.toolbox.precache(
-    [
-        '/index.html',
-        '/manifest.json'
-    ]
-);
+self.addEventListener('install', function(event) {
+    event.waitUntil(
+        caches.open(CACHE_NAME)
+            .then(function(cache) {
+                return cache.addAll(CACHE_OFFLINE);
+            })
+    );
+});
 
-// dynamically cache any other local assets
-self.toolbox.router.any('/*', self.toolbox.cacheFirst);
+self.addEventListener('fetch', function(event) {
+    event.respondWith(
+        caches.match(event.request)
+            .then(function(response) {
+                return response || fetchAndCache(event.request);
+            })
+    );
+});
 
-// for any other requests go to the network, cache,
-// and then only use that cached resource if your user goes offline
-self.toolbox.router.default = self.toolbox.networkFirst;
-
+function fetchAndCache(url) {
+    return fetch(url)
+        .then(function(response) {
+            // Check if we received a valid response
+            if (!response.ok) {
+                throw Error(response.statusText);
+            }
+            return caches.open(CACHE_NAME)
+                .then(function(cache) {
+                    cache.put(url, response.clone());
+                    return response;
+                });
+        })
+        .catch(function(error) {
+            console.log('Request failed:', error);
+            // You could return a custom offline 404 page here
+        });
+}

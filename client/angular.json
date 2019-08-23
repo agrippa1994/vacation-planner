@@ -35,7 +35,8 @@
                 "input": "node_modules/leaflet/dist/images",
                 "output": "."
               },
-              "src/manifest.json"
+              "src/manifest.json",
+              "src/sw.js"
             ],
             "styles": [
               {
