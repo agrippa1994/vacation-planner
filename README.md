@@ -141,3 +141,27 @@ __invoice object:__
 | --------- |---------------------------------| ---------------------------------------------------------------------------------------------- |
 | GET       | `/api/cashbox/sum/{currency}`       | Returns the sum of the costs of all invoices converted to the given currency (default EUR) |
 | GET       | `/api/cashbox/converted/{currency}` | Returns all Invoices with the costs converted to the given currency                        |
+
+## Progressive Web App
+
+The last step was to turn the application into a progressive web app. (=PWA), to add mobile devices and offline support. 
+The first step was to create `manifest.json` file and add this and other infos in the `index.html` file.
+This manifest inculudes information about the app. (name, color, icons). The service worker (`sw.js`) supports the offline functionality. 
+
+#### Problems
+A big problem was the compatibility between the internet-guides and our angular application, because if you use angular you must also
+extend the `angular.json` file. If you don't extend this file you will get errors. (404, fetching errors).
+So you must add this do your angular configuration file:
+
+ `"src/manifest.json",
+ "src/sw.js"`
+ 
+ In newer angular versions it is also possible to create the manifest.json automatically with the command 
+ `ng add @angular/pwa`. (https://angular.io/guide/service-worker-getting-started).
+ It is also possible to add the service worker in the `index.html` file. (commented out)
+ 
+ #### Affort
+ The main affort includes researches, reading guides and turn the current angular/ionic application in a PWA.
+ (extend and add files, search errors)
+
+  
